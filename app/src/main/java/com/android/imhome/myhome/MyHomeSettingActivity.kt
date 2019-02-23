@@ -21,6 +21,9 @@ import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import kotlinx.android.synthetic.main.activity_my_home_setting.*
 import java.util.ArrayList
+import com.android.imhome.util.PreferencesUtil
+import com.android.imhome.util.Util
+
 
 class MyHomeSettingActivity : BaseActivity() {
 
@@ -46,13 +49,22 @@ class MyHomeSettingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_home_setting)
-        mBinding.iconIsHomeStatus.isEnabled = false
+        mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this)
+
+        mBinding.inputLatitude.setText(PreferencesUtil.getLatitude(this).toString())
+        mBinding.inputLongitude.setText(PreferencesUtil.getLongitude(this).toString())
+        mBinding.inputEntryRadius.setText(PreferencesUtil.getRadius(this).toString())
+        mBinding.inputWifiSsid.setText(PreferencesUtil.getSSID(this))
 
         mBinding.buttonSave.setOnClickListener {
             val latitude = mBinding.inputLatitude.text.toString().toDoubleOrNull()
             val longitude = mBinding.inputLongitude.text.toString().toDoubleOrNull()
             val radius = mBinding.inputEntryRadius.text.toString().toFloatOrNull()
 
+            //save the Home WiFi SSID
+            PreferencesUtil.putSSID(this, mBinding.inputWifiSsid.text.toString())
+
+            //save the Home Location
             if (latitude != null && longitude != null && radius != null) {
                 mBinding.iconIsHomeStatus.isEnabled = false
                 addGeoFencing(latitude, longitude, radius)
@@ -119,6 +131,11 @@ class MyHomeSettingActivity : BaseActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            PreferencesUtil.putLatitude(this, latitude)
+            PreferencesUtil.putLongitude(this, longitude)
+            PreferencesUtil.putRadius(this, radius)
+            PreferencesUtil.putIsHomed(this, false)
+
             val geofence = Geofence.Builder()
                 .setRequestId(GEOFENCE_ID)
                 .setExpirationDuration(NEVER_EXPIRE)

@@ -11,6 +11,7 @@ import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.imhome.R;
+import com.android.imhome.util.PreferencesUtil;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;
 import com.google.android.gms.location.GeofencingEvent;
@@ -73,6 +74,7 @@ public class GeofenceTransitionsIntentService extends JobIntentService {
             for (int i = 0; i < triggeringGeofences.size(); i++) {
                 if (triggeringGeofences.get(i).getRequestId().equals(MyHomeSettingActivity.GEOFENCE_ID)){
                     sendNotification(triggeringGeofences.get(i).getRequestId());
+                    PreferencesUtil.Companion.putIsHomed(getApplicationContext(), geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER);
                     GeoFenceLiveData.Companion.setIsHome(geofenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER);
                     break;
                 }
