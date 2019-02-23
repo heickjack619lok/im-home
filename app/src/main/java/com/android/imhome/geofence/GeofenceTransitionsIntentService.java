@@ -1,4 +1,4 @@
-package com.android.imhome.myhome;
+package com.android.imhome.geofence;
 
 import android.app.*;
 import android.content.Context;
@@ -8,9 +8,10 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
 import android.support.v4.app.NotificationCompat;
-import android.text.TextUtils;
 import android.util.Log;
 import com.android.imhome.R;
+import com.android.imhome.model.GeoFenceLiveData;
+import com.android.imhome.ui.myhome.MyHomeSettingActivity;
 import com.android.imhome.util.PreferencesUtil;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofenceStatusCodes;

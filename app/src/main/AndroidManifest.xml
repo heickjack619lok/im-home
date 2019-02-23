@@ -13,30 +13,30 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
-                android:name=".BaseActivity"
+                android:name=".util.BaseActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".HomeActivity"
+                android:name=".ui.main.HomeActivity"
                 android:screenOrientation="portrait"/>
         <activity
-                android:name=".myhome.MyHomeSettingActivity"
+                android:name=".ui.myhome.MyHomeSettingActivity"
                 android:screenOrientation="portrait"/>
 
         <service
-                android:name=".myhome.GeofenceTransitionsIntentService"
+                android:name=".geofence.GeofenceTransitionsIntentService"
                 android:exported="true"
                 android:enabled="true"
                 android:permission="android.permission.BIND_JOB_SERVICE"/>
 
         <receiver
-                android:name=".myhome.GeofenceBroadcastReceiver"
+                android:name=".geofence.GeofenceBroadcastReceiver"
                 android:enabled="true"
                 android:exported="true">
             <intent-filter>

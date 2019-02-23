@@ -1,4 +1,4 @@
-package com.android.imhome.myhome;
+package com.android.imhome.geofence;
 
 /*
  * Copyright 2017 Google Inc. All Rights Reserved.

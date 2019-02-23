@@ -1,11 +1,13 @@
-package com.android.imhome
+package com.android.imhome.ui.main
 
 import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import com.android.imhome.util.BaseActivity
+import com.android.imhome.R
 import com.android.imhome.databinding.ActivityHomeBinding
-import com.android.imhome.myhome.MyHomeSettingActivity
+import com.android.imhome.ui.myhome.MyHomeSettingActivity
 import com.android.imhome.util.Util
 
 class HomeActivity : BaseActivity(){

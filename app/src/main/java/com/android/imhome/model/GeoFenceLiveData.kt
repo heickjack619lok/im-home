@@ -1,4 +1,4 @@
-package com.android.imhome.myhome
+package com.android.imhome.model
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
@@ -8,7 +8,7 @@ class GeoFenceLiveData : ViewModel() {
         private val isHome = MutableLiveData<Boolean>()
 
         fun setIsHome(isHome: Boolean) {
-            this.isHome.postValue(isHome)
+            Companion.isHome.postValue(isHome)
         }
 
         fun getIsHome(): MutableLiveData<Boolean> {

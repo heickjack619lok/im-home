@@ -1,4 +1,4 @@
-package com.android.imhome.myhome
+package com.android.imhome.ui.myhome
 
 import android.Manifest
 import android.app.PendingIntent
@@ -12,9 +12,11 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.widget.Toast
-import com.android.imhome.BaseActivity
+import com.android.imhome.util.BaseActivity
 import com.android.imhome.R
 import com.android.imhome.databinding.ActivityMyHomeSettingBinding
+import com.android.imhome.model.GeoFenceLiveData
+import com.android.imhome.geofence.GeofenceBroadcastReceiver
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.Geofence.NEVER_EXPIRE
 import com.google.android.gms.location.GeofencingRequest
@@ -29,7 +31,6 @@ class MyHomeSettingActivity : BaseActivity() {
 
     private lateinit var mBinding: ActivityMyHomeSettingBinding
     private var mGeofencePendingIntent: PendingIntent? = null
-
 
     companion object {
         const val PERMISSIONS_REQUEST_LOCATION = 99
@@ -50,10 +51,12 @@ class MyHomeSettingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_my_home_setting)
         mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this)
+        toolbar.setNavigationOnClickListener { finish() }
 
-        mBinding.inputLatitude.setText(PreferencesUtil.getLatitude(this).toString())
-        mBinding.inputLongitude.setText(PreferencesUtil.getLongitude(this).toString())
-        mBinding.inputEntryRadius.setText(PreferencesUtil.getRadius(this).toString())
+        //show stored information
+        mBinding.inputLatitude.setText(PreferencesUtil.getLatitude(this))
+        mBinding.inputLongitude.setText(PreferencesUtil.getLongitude(this))
+        mBinding.inputEntryRadius.setText(PreferencesUtil.getRadius(this))
         mBinding.inputWifiSsid.setText(PreferencesUtil.getSSID(this))
 
         mBinding.buttonSave.setOnClickListener {
@@ -73,7 +76,6 @@ class MyHomeSettingActivity : BaseActivity() {
                 addGeoFencing(latitude, longitude, radius)
             }
         }
-        toolbar.setNavigationOnClickListener { finish() }
 
         //listener to get isHome status and display it
         GeoFenceLiveData.getIsHome().observe(this, Observer { mBinding.iconIsHomeStatus.isEnabled = it ?: false })
@@ -93,7 +95,6 @@ class MyHomeSettingActivity : BaseActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(
                     this,
@@ -134,6 +135,7 @@ class MyHomeSettingActivity : BaseActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            //store the latest information
             PreferencesUtil.putLatitude(this, latitude)
             PreferencesUtil.putLongitude(this, longitude)
             PreferencesUtil.putRadius(this, radius)
