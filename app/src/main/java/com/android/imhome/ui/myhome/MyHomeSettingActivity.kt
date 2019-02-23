@@ -70,9 +70,6 @@ class MyHomeSettingActivity : BaseActivity() {
 
             //save the Home Location
             if (latitude != null && longitude != null && radius != null) {
-                //only check WiFi connected because location information will be reset
-                //if WiFi connected, it is still inHome, else wait for geofence ping
-                mBinding.iconIsHomeStatus.isEnabled = Util.isConnectedHomeWiFi(this)
                 addGeoFencing(latitude, longitude, radius)
             }
         }
@@ -141,6 +138,10 @@ class MyHomeSettingActivity : BaseActivity() {
             PreferencesUtil.putRadius(this, radius)
             PreferencesUtil.putIsHomed(this, false)
 
+            //only check WiFi connected because location information will be reset
+            //if WiFi connected, it is still inHome, else wait for geofence ping
+            mBinding.iconIsHomeStatus.isEnabled = Util.isConnectedHomeWiFi(this)
+
             val geofence = Geofence.Builder()
                 .setRequestId(GEOFENCE_ID)
                 .setExpirationDuration(NEVER_EXPIRE)
@@ -161,6 +162,20 @@ class MyHomeSettingActivity : BaseActivity() {
                         task.exception!!.printStackTrace()
                     }
                 }
+        }else{
+            AlertDialog.Builder(this)
+                .setTitle(R.string.location_needed_title)
+                .setMessage(R.string.failed_added_home_with_permission_request)
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    //Prompt the user once explanation has been shown
+                    ActivityCompat.requestPermissions(
+                        this@MyHomeSettingActivity,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        PERMISSIONS_REQUEST_LOCATION
+                    )
+                }
+                .create()
+                .show()
         }
     }
 

@@ -12,6 +12,7 @@
     <string name="welcome_home">Welcome Home</string>
     <string name="success_added_home">Home location is saved.</string>
     <string name="failed_added_home">Failed to save Home location, please try again later.</string>
+    <string name="failed_added_home_with_permission_request">Failed to save Home Location, please accept to use Location functionality and click \"SAVE\" button again. </string>
 
     <string name="location_needed_title">Location Permission Needed</string>
     <string name="location_needed_desc">This app needs the Location permission, please accept to use location functionality</string>
