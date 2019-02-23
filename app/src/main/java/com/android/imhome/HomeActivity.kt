@@ -5,6 +5,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.android.imhome.databinding.ActivityHomeBinding
+import com.android.imhome.myhome.MyHomeSettingActivity
 
 class HomeActivity : BaseActivity(){
 
@@ -20,5 +21,6 @@ class HomeActivity : BaseActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        mBinding.buttonMyHomeSetting.setOnClickListener { MyHomeSettingActivity.start(this@HomeActivity) }
     }
 }
