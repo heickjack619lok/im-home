@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import com.android.imhome.databinding.ActivityHomeBinding
 import com.android.imhome.myhome.MyHomeSettingActivity
+import com.android.imhome.util.Util
 
 class HomeActivity : BaseActivity(){
 
@@ -22,5 +23,14 @@ class HomeActivity : BaseActivity(){
         super.onCreate(savedInstanceState)
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
         mBinding.buttonMyHomeSetting.setOnClickListener { MyHomeSettingActivity.start(this@HomeActivity) }
+        mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (::mBinding.isInitialized){
+            mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this)
+        }
     }
 }

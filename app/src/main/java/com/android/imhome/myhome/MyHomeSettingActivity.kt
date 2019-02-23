@@ -63,10 +63,13 @@ class MyHomeSettingActivity : BaseActivity() {
 
             //save the Home WiFi SSID
             PreferencesUtil.putSSID(this, mBinding.inputWifiSsid.text.toString())
+            mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this)
 
             //save the Home Location
             if (latitude != null && longitude != null && radius != null) {
-                mBinding.iconIsHomeStatus.isEnabled = false
+                //only check WiFi connected because location information will be reset
+                //if WiFi connected, it is still inHome, else wait for geofence ping
+                mBinding.iconIsHomeStatus.isEnabled = Util.isConnectedHomeWiFi(this)
                 addGeoFencing(latitude, longitude, radius)
             }
         }
