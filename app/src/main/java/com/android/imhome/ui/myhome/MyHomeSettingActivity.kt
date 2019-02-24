@@ -75,7 +75,7 @@ class MyHomeSettingActivity : BaseActivity() {
         }
 
         //listener to get isHome status and display it
-        GeoFenceLiveData.getIsHome().observe(this, Observer { mBinding.iconIsHomeStatus.isEnabled = it ?: false })
+        GeoFenceLiveData.getIsHome().observe(this, Observer { mBinding.iconIsHomeStatus.isEnabled = Util.isHomed(this@MyHomeSettingActivity) })
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
