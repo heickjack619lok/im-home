@@ -9,7 +9,7 @@ Geofence area is defined as a combination of some geographic point, radius, and 
 Screenshots
 ------------
 ![mainpage](imhome_1.png "Main Page of Im-Home")
-![homesetting](imhome_1.png "Manage Home's Setting")
+![homesetting](imhome_2.png "Manage Home's Setting")
 
 Libraries Used
 --------------
