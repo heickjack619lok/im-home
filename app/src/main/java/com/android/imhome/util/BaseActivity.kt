@@ -1,4 +1,4 @@
-package com.android.imhome
+package com.android.imhome.util
 
 import android.support.v7.app.AppCompatActivity
 

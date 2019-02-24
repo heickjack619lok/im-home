@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">Im-Home</string>
     <string name="my_home">My Home</string>
+    <string name="home_location">Home Location</string>
+    <string name="home_latitude">Latitude:</string>
+    <string name="home_longitude">Longitude:</string>
+    <string name="entry_radius">Entry Radius[in meters]:</string>
+    <string name="home_network">Home Network</string>
+    <string name="home_wifi_ssid">Home WiFi SSID:</string>
+    <string name="is_home">Is Home:</string>
+    <string name="save">Save</string>
+    <string name="welcome_home">Welcome Home</string>
+    <string name="success_added_home">Home location is saved.</string>
+    <string name="failed_added_home">Failed to save Home location, please try again later.</string>
+    <string name="failed_added_home_with_permission_request">Failed to save Home Location, please accept to use Location functionality and click \"SAVE\" button again. </string>
+
+    <string name="location_needed_title">Location Permission Needed</string>
+    <string name="location_needed_desc">This app needs the Location permission, please accept to use location functionality</string>
+    <string name="location_permission_not_granted">Im-Home might not able to detect if you have home-ed in future without Location permission. Please make sure Location permission is allowed to make sure Im-Home works well.</string>
+    <string name="ok">OK</string>
 </resources>
